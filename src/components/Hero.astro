@@ -1,0 +1,20 @@
+---
+import type { Locale } from '../i18n/utils';
+import { useTranslations, localeUrls } from '../i18n/utils';
+
+interface Props { lang: Locale; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section class="hero">
+  <div class="hero-content">
+    <span class="hero-tag">{t('hero-tag')}</span>
+    <h1>{t('hero-title')}</h1>
+    <p class="hero-subtitle">{t('hero-subtitle')}</p>
+    <div class="hero-btns">
+      <a href={`${localeUrls[lang]}#donar`} class="btn primary">{t('hero-cta-primary')}</a>
+      <a href={`${localeUrls[lang]}#proyectos`} class="btn secondary">{t('hero-cta-secondary')}</a>
+    </div>
+  </div>
+</section>

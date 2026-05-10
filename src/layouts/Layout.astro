@@ -1,0 +1,73 @@
+---
+import '../styles/global.css';
+import type { Locale } from '../i18n/utils';
+
+interface Props {
+  lang: Locale;
+  title: string;
+  description: string;
+}
+
+const { lang, title, description } = Astro.props;
+const site = 'https://accfrboficial.github.io';
+const langPaths: Record<Locale, string> = { es: '/', pt: '/pt/', en: '/en/' };
+---
+
+<!DOCTYPE html>
+<html lang={lang}>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="keywords" content="cubanos en Brasil, migrantes cubanos, ayuda humanitaria Brasil, ONG cubana, comunidad cubana Brasil, ACCRFB" />
+  <meta name="author" content="ACCRFB" />
+  <meta name="robots" content="index, follow" />
+
+  <link rel="preload" as="image" href="/pic1.png" />
+  <link rel="preload" as="image" href="/pic4.jpg" />
+
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={`${site}/logo.png`} />
+  <meta property="og:url" content={`${site}${langPaths[lang]}`} />
+  <meta property="og:type" content="website" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={`${site}/logo.png`} />
+
+  <link rel="icon" href="/logo.png" type="image/png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <link rel="alternate" hreflang="es" href={`${site}/`} />
+  <link rel="alternate" hreflang="pt" href={`${site}/pt/`} />
+  <link rel="alternate" hreflang="en" href={`${site}/en/`} />
+
+  <script type="application/ld+json">
+    {JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "ACCRFB",
+      "url": site,
+      "logo": `${site}/logo.png`,
+      "description": "Organización que apoya a migrantes cubanos en Brasil.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Boa Vista",
+        "addressRegion": "Roraima",
+        "addressCountry": "BR"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+55-95-99116-6073",
+        "contactType": "customer service"
+      }
+    })}
+  </script>
+</head>
+<body>
+  <slot />
+</body>
+</html>

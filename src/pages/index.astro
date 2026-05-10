@@ -1,0 +1,32 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Stats from '../components/Stats.astro';
+import About from '../components/About.astro';
+import Projects from '../components/Projects.astro';
+import VisionMision from '../components/VisionMision.astro';
+import Donate from '../components/Donate.astro';
+import Footer from '../components/Footer.astro';
+import BackToTop from '../components/BackToTop.astro';
+
+const lang = 'es' as const;
+---
+
+<Layout
+  lang={lang}
+  title="ACCRFB | Comunidad Cubana en Brasil | Apoyo a Migrantes Cubanos"
+  description="ACCRFB es una organización que apoya a migrantes cubanos en Brasil con ayuda legal, social y cultural. Únete o dona para transformar vidas."
+>
+  <Header lang={lang} />
+  <main>
+    <Hero lang={lang} />
+    <Stats lang={lang} />
+    <About lang={lang} />
+    <Projects lang={lang} />
+    <VisionMision lang={lang} />
+    <Donate lang={lang} />
+  </main>
+  <Footer lang={lang} />
+  <BackToTop lang={lang} />
+</Layout>

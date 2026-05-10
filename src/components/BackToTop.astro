@@ -1,0 +1,24 @@
+---
+import type { Locale } from '../i18n/utils';
+import { useTranslations } from '../i18n/utils';
+
+interface Props { lang: Locale; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<button class="back-to-top" id="back-to-top" aria-label={t('back-to-top')}>
+  <i class="fas fa-arrow-up" aria-hidden="true"></i>
+</button>
+
+<script>
+  const btn = document.getElementById('back-to-top');
+
+  window.addEventListener('scroll', () => {
+    btn?.classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+
+  btn?.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>

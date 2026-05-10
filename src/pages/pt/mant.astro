@@ -1,0 +1,34 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { useTranslations, localeUrls } from '../../i18n/utils';
+
+const lang = 'pt' as const;
+const t = useTranslations(lang);
+---
+
+<Layout lang={lang} title="ACCRFB — Em construção" description="Página em construção">
+  <style>
+    body { background: #0f2e1f; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    .mant-card {
+      text-align: center; color: white; padding: 3rem 2rem; max-width: 500px;
+      background: rgba(255,255,255,0.05); border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .mant-icon { font-size: 4rem; margin-bottom: 1.5rem; }
+    h1 { font-size: 2rem; font-weight: 900; margin-bottom: 1rem; color: #10b981; }
+    p { color: rgba(255,255,255,0.7); margin-bottom: 2rem; }
+    .back-btn {
+      display: inline-block; padding: 0.9rem 2rem; border-radius: 50px;
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white; font-weight: 700; text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .back-btn:hover { opacity: 0.9; }
+  </style>
+  <div class="mant-card">
+    <div class="mant-icon">🚧</div>
+    <h1>{t('mant-title')}</h1>
+    <p>{t('mant-desc')}</p>
+    <a href={localeUrls[lang]} class="back-btn">← Voltar</a>
+  </div>
+</Layout>

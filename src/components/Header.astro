@@ -1,0 +1,107 @@
+---
+import type { Locale } from '../i18n/utils';
+import { useTranslations, localeFlags, localeUrls } from '../i18n/utils';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const locales: Locale[] = ['es', 'pt', 'en'];
+---
+
+<header>
+  <div class="header-container">
+    <a href={localeUrls[lang]} class="logo" aria-label="ACCRFB — Inicio">
+      <img src="/logo.png" alt="ACCRFB Logo" class="logo-img" width="45" height="45" />
+      <span class="logo-text">ACC<span>RFB</span></span>
+    </a>
+
+    <div class="lang-selector" id="lang-selector">
+      <button
+        class="lang-btn"
+        id="lang-btn"
+        aria-haspopup="listbox"
+        aria-expanded="false"
+        aria-label={t('lang-label')}
+      >
+        <span class="lang-icon">{lang.toUpperCase()}</span>
+        <span class="lang-text">
+          <span class="lang-current">{t(`lang-${lang}`)}</span>
+          <span class="lang-full">{t('lang-label')}</span>
+        </span>
+        <span class="lang-arrow" aria-hidden="true">
+          <i class="fas fa-chevron-down"></i>
+        </span>
+      </button>
+
+      <div class="lang-dropdown" role="listbox" aria-label={t('lang-label')}>
+        {locales.map((locale) => (
+          <a
+            href={localeUrls[locale]}
+            class="lang-option"
+            role="option"
+            aria-current={locale === lang ? 'true' : 'false'}
+            aria-selected={locale === lang}
+          >
+            <span class="lang-flag" aria-hidden="true">{localeFlags[locale]}</span>
+            <span class="lang-name">{t(`lang-${locale}`)}</span>
+            <span class="lang-check" aria-hidden="true"><i class="fas fa-check"></i></span>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <button class="menu-toggle" id="mobile-menu" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-menu">
+      <i class="fa-solid fa-bars" aria-hidden="true"></i>
+    </button>
+
+    <nav id="nav-menu" aria-label="Navegación principal">
+      <a href={`${localeUrls[lang]}#`}>{t('nav-inicio')}</a>
+      <a href={`${localeUrls[lang]}#sobre`}>{t('nav-sobre')}</a>
+      <a href={`${localeUrls[lang]}#proyectos`}>{t('nav-proyectos')}</a>
+      <a href={`${localeUrls[lang]}#donar`} class="nav-btn-donar">{t('nav-donar')}</a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const langSelector = document.getElementById('lang-selector');
+  const langBtn = document.getElementById('lang-btn');
+
+  langBtn?.addEventListener('click', () => {
+    const isOpen = langSelector?.classList.toggle('open');
+    langBtn.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!langSelector?.contains(e.target as Node)) {
+      langSelector?.classList.remove('open');
+      langBtn?.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      langSelector?.classList.remove('open');
+      langBtn?.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  const menuToggle = document.getElementById('mobile-menu');
+  const navMenu = document.getElementById('nav-menu');
+
+  menuToggle?.addEventListener('click', () => {
+    const isOpen = navMenu?.classList.toggle('active');
+    menuToggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  navMenu?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navMenu.classList.remove('active');
+      menuToggle?.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>

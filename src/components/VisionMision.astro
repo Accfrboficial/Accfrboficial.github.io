@@ -1,0 +1,29 @@
+---
+import type { Locale } from '../i18n/utils';
+import { useTranslations } from '../i18n/utils';
+
+interface Props { lang: Locale; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const cards = [
+  { icon: 'fa-bullseye', titleKey: 'mission-title', descKey: 'mission-desc' },
+  { icon: 'fa-eye',      titleKey: 'vision-title',  descKey: 'vision-desc'  },
+  { icon: 'fa-heart',    titleKey: 'values-title',  descKey: 'values-desc'  },
+] as const;
+---
+
+<section class="section" id="vision">
+  <h2 class="section-title">{t('vm-section-title')}</h2>
+  <div class="vision-mision-container">
+    {cards.map(({ icon, titleKey, descKey }) => (
+      <div class="vm-card">
+        <div class="vm-icon" aria-hidden="true">
+          <i class={`fas ${icon}`}></i>
+        </div>
+        <h3>{t(titleKey)}</h3>
+        <p>{t(descKey)}</p>
+      </div>
+    ))}
+  </div>
+</section>

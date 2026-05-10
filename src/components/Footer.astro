@@ -1,0 +1,61 @@
+---
+import type { Locale } from '../i18n/utils';
+import { useTranslations } from '../i18n/utils';
+
+interface Props { lang: Locale; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<footer>
+  <div class="footer-main">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <img src="/logo.png" alt="ACCRFB Logo" class="logo-img" width="45" height="45" loading="lazy" />
+        <div class="footer-logo-text">ACC<span>RFB</span></div>
+      </div>
+      <p>{t('footer-tagline')}</p>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/61588779044911" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <i class="fab fa-facebook-f" aria-hidden="true"></i>
+        </a>
+        <a href="https://whatsapp.com/channel/0029Vb7nO2OATRSpQ36nw41l" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+          <i class="fab fa-whatsapp" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-nav-contact">
+      <div class="footer-contact-section">
+        <h4>{t('footer-contact-title')}</h4>
+        <div class="footer-contact-item">
+          <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+          <div>
+            <span>{t('footer-location-label')}</span>
+            <strong>Brasil</strong>
+          </div>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fas fa-envelope" aria-hidden="true"></i>
+          <div>
+            <span>Email</span>
+            <strong><a href="mailto:accrfboficial@gmail.com">accrfboficial@gmail.com</a></strong>
+          </div>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fas fa-phone" aria-hidden="true"></i>
+          <div>
+            <span>{t('footer-phone-label')}</span>
+            <strong><a href="tel:+5595991166073">+55 95 99116-6073</a></strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p class="footer-copyright">
+      {t('footer-copyright')} — <a href="https://www.facebook.com/61588779044911">ACCRFB</a>
+    </p>
+  </div>
+</footer>

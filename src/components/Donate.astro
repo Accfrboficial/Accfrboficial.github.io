@@ -1,0 +1,61 @@
+---
+import type { Locale } from '../i18n/utils';
+import { useTranslations } from '../i18n/utils';
+
+interface Props { lang: Locale; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const pixKey = 'eveliojesusmederovazquez@gmail.com';
+const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=00020126550014br.gov.bcb.pix0133yeseniazaldivarvarela35@gmail.com52040000530398654045.005802BR5925EVELIO JESUS MEDERO VAZQU6009BOA VISTA62070503***63041B73`;
+---
+
+<section class="section donate-highlight" id="donar">
+  <div class="donate-card">
+    <div class="donate-info">
+      <h2>{t('donate-title')}</h2>
+      <p>{t('donate-desc')}</p>
+      <div class="pix-copy-box">
+        <span id="pix-key">{pixKey}</span>
+        <button
+          id="copy-pix-btn"
+          aria-label={t('donate-pix-label')}
+          data-success={t('donate-copy-success')}
+          data-fail={t('donate-copy-fail')}
+        >
+          <i class="fa-regular fa-copy" aria-hidden="true"></i>
+        </button>
+      </div>
+      <small>{t('donate-pix-label')}</small>
+    </div>
+    <div class="donate-qr">
+      <img src={qrUrl} alt="QR Code Pix" width="180" height="180" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+<script>
+  const btn = document.getElementById('copy-pix-btn') as HTMLButtonElement | null;
+  const pixKeyEl = document.getElementById('pix-key');
+
+  btn?.addEventListener('click', async () => {
+    const text = pixKeyEl?.textContent ?? '';
+    const successMsg = btn.dataset.success ?? '✔';
+    const failMsg = btn.dataset.fail ?? '✖';
+    const original = btn.innerHTML;
+
+    try {
+      await navigator.clipboard.writeText(text);
+      btn.textContent = `✔ ${successMsg}`;
+      btn.style.background = '#059669';
+    } catch {
+      btn.textContent = `✖ ${failMsg}`;
+      btn.style.background = '#dc2626';
+    }
+
+    setTimeout(() => {
+      btn.innerHTML = original;
+      btn.style.background = '';
+    }, 2000);
+  });
+</script>
