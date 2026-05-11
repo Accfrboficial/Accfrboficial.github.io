@@ -1,5 +1,8 @@
 # ACCRFB — Official Website
 
+[![Deploy to GitHub Pages](https://github.com/Accfrboficial/Accfrboficial.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/Accfrboficial/Accfrboficial.github.io/actions/workflows/deploy.yml)
+[![Live site](https://img.shields.io/badge/site-accfrboficial.github.io-blue)](https://accfrboficial.github.io)
+
 Website of the Association of Cuban Communities in the Federative Republic of Brazil. Built with [Astro](https://astro.build) and published on GitHub Pages.
 
 ---
